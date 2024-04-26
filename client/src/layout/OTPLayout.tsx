@@ -1,14 +1,11 @@
-interface OPTLayoutProps {
-  children: React.ReactNode
-}
+import OTPForm from "../forms/OTPForm"
+import ScreenLayout from "./ScreenLayout"
 
-const OTPLayout: React.FC<OPTLayoutProps> = ({ children }) => {
+const OTPLayout = () => {
   return (
-    <div
-      className="h-screen w-screen flex items-center justify-center"
-    >
-      {children}
-    </div>
+    <ScreenLayout>
+      <OTPForm />
+    </ScreenLayout>
   )
 }
 

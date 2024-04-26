@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "@tanstack/react-router";
 import axios from "axios"
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { codeError, useOtpPins } from '../hooks/use_OTP_PINS';
 import Button from "../components/Button";
 import Form from "../components/Form";
 import OTPInput from "../components/OTPInput";
 import Title from '../components/Title';
+import BoxContainer from "../components/BoxContainer";
 
 const OTPForm = () => {
-
   const { code, setCode, length, setError } = useOtpPins();
-
+  const navigate = useNavigate();
   const [verified, setVerified] = useState<boolean>(false);
   const [postErrors, setPostErrors] = useState<string[]>([]);
 
@@ -32,6 +33,7 @@ const OTPForm = () => {
     try {
       await axios.post(`${process.env.API_ENDPOINT}/verify`, { code: code.join('') });
       setVerified(true);
+      navigate({ to: '/success' });
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       if (err.response) {
@@ -64,7 +66,7 @@ const OTPForm = () => {
   }
 
   return (
-    <div className='shadow-sm border border-gray-500 p-5 rounded-lg relative'>
+    <BoxContainer>
       <Title
         title='Enter your OTP'
         className='font-mono text-xl font-semibold mb-5'
@@ -91,8 +93,7 @@ const OTPForm = () => {
           </Button>
         </div>
       </Form>
-      <Toaster />
-    </div>
+    </BoxContainer>
   )
 }
 
