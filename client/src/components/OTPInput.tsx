@@ -19,15 +19,17 @@ const OTPInput = () => {
     pin[index] = validateInput(input, index);
     setCode(pin);
 
-    if (pin[index] !== '') {
-      if (input.length === 1 && index < length - 1) {
-        inputRef.current[index + 1]?.focus();
-      }
-
-      if (input.length === 0 && index > 0) {
+    if (input.length === 1 && index < length - 1) {
+      inputRef.current[index + 1]?.focus();
+    }
+    if (input.length === 0) {
+      if (index > 0) {
         inputRef.current[index - 1]?.focus();
+      } else {
+        inputRef.current[index]?.focus();
       }
     }
+
   };
 
   const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {

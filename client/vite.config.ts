@@ -9,6 +9,17 @@ export default defineConfig(({ mode }) => {
     define: {
       'process.env.API_ENDPOINT': JSON.stringify(env.API_ENDPOINT)
     },
+    base: "/",
+    preview: {
+      port: 8081,
+      strictPort: true,
+    },
     plugins: [react(), TanStackRouterVite()],
+    server: {
+      port: 8081,
+      strictPort: true,
+      host: true,
+      origin: "http://0.0.0.0:8081",
+    },
   }
 })

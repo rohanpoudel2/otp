@@ -38,6 +38,8 @@ const OTPForm = () => {
     } catch (err: any) {
       if (err.response) {
         setPostErrors(err.response.data.errors);
+      } else {
+        toast.error('Something Went Wrong');
       }
       setVerified(false);
     }
