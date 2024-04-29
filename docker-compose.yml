@@ -1,0 +1,21 @@
+version: '3.7'
+
+services:
+  react-client:
+    build: ./client
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      - API_ENDPOINT=https://express-server:8080
+    depends_on:
+      - express-server
+
+  express-server:
+    build: ./server
+    restart: always
+    ports:
+      - 8080:8080
+    environment:
+      - PORT=8080
+      - CLIENT_LOCATION=https://react-client:8081

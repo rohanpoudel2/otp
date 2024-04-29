@@ -10,4 +10,5 @@ export default {
   api: {
     prefix: '/api',
   },
+  client_location: process.env.CLIENT_LOCATION || 'http://127.0.0.1:8081'
 }
